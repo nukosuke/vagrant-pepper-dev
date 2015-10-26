@@ -2,8 +2,14 @@
   sudo: true
   user: vagrant
   tasks:
-    - name: install requirements
-      apt: name={{item}} update_cache=yes
-      with_items:
-        - build-essential
-        - git
+    - name: install build-essential
+      apt: name=build-essential update_cache=yes
+
+    - name: install git
+      apt: name=git
+
+    - name: install python-pip
+      apt: name=python-pip
+
+    - name: virtual env
+      pip: name=virtualenv
