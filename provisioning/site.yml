@@ -6,3 +6,4 @@
       apt: name={{item}} update_cache=yes
       with_items:
         - build-essential
+        - git
