@@ -16,3 +16,7 @@
         echo 'export PYTHONPATH="$PYTHONPATH:$HOME/data/pynaoqi-python2.7-2.3.1.25-linux64"' >> "{{ vagrant_home }}/.bash_profile"
         echo 'export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$HOME/data/pynaoqi-python2.7-2.3.1.25-linux64"' >> "{{ vagrant_home }}/.bash_profile"
       sudo: no
+
+    - name: localeの設定
+      shell: bash -lc 'LC_ALL="en_US.UTF-8"'
+      sudo: no
