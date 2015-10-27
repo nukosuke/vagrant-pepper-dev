@@ -26,4 +26,5 @@
       shell: pyenv rehash
       shell: pyenv global {{python_version}}
     
-
+    - name: pepper SDKの解凍
+      shell: tar zxvf pynaoqi-python2.7-2.3.1.25-linux64.tar.gz chdir=data
