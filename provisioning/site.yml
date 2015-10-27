@@ -1,15 +1,29 @@
 - hosts: vagrants
   sudo: true
   user: vagrant
+  vars:
+    vagrant_home: "/home/vagrant"
+    python_version: "2.7.10"
   tasks:
-    - name: install build-essential
+    - name: build-essentialのインストール
       apt: name=build-essential update_cache=yes
 
-    - name: install git
-      apt: name=git
+    - name: gitのインストール
+      apt: name=git update_cache=yes
 
-    - name: install python-pip
-      apt: name=python-pip
+    - name: pyenvのインストール
+      git: repo=https://github.com/yyuu/pyenv.git
+      dest:{{vagrant_home}}/.pyenv
+      version=master
 
-    - name: virtual env
-      pip: name=virtualenv
+    - name: pyenvのパスを設定する
+      shell: echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
+      shell: echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
+      shell: echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
+
+    - name: pythonのバージョンを{{python_version}}に設定
+      shell: pyenv install {{python_version}}
+      shell: pyenv rehash
+      shell: pyenv global {{python_version}}
+    
+
