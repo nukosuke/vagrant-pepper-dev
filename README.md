@@ -31,6 +31,12 @@ $ mv ~/Downloads/pynaoqi-python2.7-2.3.1.25-linux64.tar.gz ./data
 
 ```sh
 $ vagrant up
+```
+
+しばらく時間がかかるのでコーヒーでも飲んでいてください。
+これで完了です。sshで接続できます。
+
+```sh
 $ vagrant ssh
 ```
 
