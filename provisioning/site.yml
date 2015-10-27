@@ -46,11 +46,14 @@
       sudo: no    
 
     - name: pepper SDKの解凍
-      shell: tar zxvf pynaoqi-python2.7-2.3.1.25-linux64.tar.gz chdir=data
+      shell: |
+        tar zxvf pynaoqi-python2.7-2.3.1.25-linux64.tar.gz
+        rm -f pynaoqi-python2.7-2.3.1.25-linux64.tar.gz
+        chdir=data
       sudo: no
 
     - name: pepper SDK にパスを通す
       shell: |
-        echo 'export PYTHONPATH="$PYTHONPATH:~/data/pynaoqi-python2.7-2.0.5.3-linux64"' >> "{{ vagrant_home }}/.bash_profile"
-        echo 'export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:~/data/pynaoqi-python2.7-2.0.5.3-linux64"' >> "{{ vagrant_home }}/.bash_profile"
+        echo 'export PYTHONPATH="$PYTHONPATH:$HOME/data/pynaoqi-python2.7-2.3.1.25-linux64"' >> "{{ vagrant_home }}/.bash_profile"
+        echo 'export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$HOME/data/pynaoqi-python2.7-2.3.1.25-linux64"' >> "{{ vagrant_home }}/.bash_profile"
       sudo: no
