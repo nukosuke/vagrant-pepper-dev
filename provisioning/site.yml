@@ -4,6 +4,9 @@
   vars:
     vagrant_home: "/home/vagrant"
   tasks:
+    - name: pipのインストール
+      apt: name=python-pip
+
     - name: pepper SDKの解凍
       shell: |
         tar zxvf pynaoqi-python2.7-2.3.1.25-linux64.tar.gz
