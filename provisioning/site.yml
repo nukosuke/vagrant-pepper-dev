@@ -7,6 +7,9 @@
     - name: pipのインストール
       apt: name=python-pip
 
+    - name: 日本語環境インストール
+      apt: name=language-pack-ja
+
     - name: pepper SDKの解凍
       shell: |
         tar zxvf pynaoqi-python2.7-2.3.1.25-linux64.tar.gz
