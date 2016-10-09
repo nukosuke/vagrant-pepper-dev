@@ -18,11 +18,11 @@ SDKの再配布ができそうにないので各自で取得してください�
 
 VMはUbuntu 14.04なのでLinux用のSDKをダウンロードします。
 
-ダウンロードが完了したら `data` ディレクトリにアーカイブファイルをそのまま配置します。
+ダウンロードが完了したらVagrantのルートディレクトリにアーカイブファイルをそのまま配置します。
 
 ```sh
 $ cd vagrant-pepper-dev
-$ mv ~/Downloads/pynaoqi-python2.7-2.3.1.25-linux64.tar.gz ./data
+$ mv ~/Downloads/pynaoqi-python2.7-2.3.1.25-linux64.tar.gz ./
 ```
 
 ### VM起動

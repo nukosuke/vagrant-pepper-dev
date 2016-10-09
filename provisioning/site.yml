@@ -1,28 +1,35 @@
-- hosts: vagrants
-  sudo: true
+- hosts: all
   user: vagrant
   vars:
-    vagrant_home: "/home/vagrant"
+    vagrant_home: "{{ ansible_env.HOME }}"
+    project_path: /vagrant/data
+    pepper_sdk: /vagrant/pynaoqi-python2.7-2.4.3.28-linux64.tar.gz
+    pepper_sdk_path: "{{ project_path }}/pynaoqi-python2.7-2.4.3.28-linux64"
   tasks:
     - name: pipのインストール
+      become: yes
       apt: name=python-pip update_cache=yes
 
+    - name: 作業用ディレクトリの作成
+      file:
+        path: "{{ project_path }}"
+        state: directory
+        mode: 0755
+        recurse: yes
+
     - name: pepper SDKの解凍
-      shell: |
-        tar zxvf pynaoqi-python2.7-2.3.1.25-linux64.tar.gz
-        rm -f pynaoqi-python2.7-2.3.1.25-linux64.tar.gz
-        chdir=data
-      sudo: no
+      unarchive:
+        src: "{{ pepper_sdk }}"
+        dest: "{{ project_path }}"
 
     - name: pepper SDK にパスを通す
       shell: |
-        echo 'export PYTHONPATH="$PYTHONPATH:$HOME/data/pynaoqi-python2.7-2.3.1.25-linux64"' >> "{{ vagrant_home }}/.bash_profile"
-        echo 'export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$HOME/data/pynaoqi-python2.7-2.3.1.25-linux64"' >> "{{ vagrant_home }}/.bash_profile"
-      sudo: no
+        echo 'export PYTHONPATH="$PYTHONPATH:{{ pepper_sdk_path }}"' >> "{{ vagrant_home }}/.bash_profile"
+        echo 'export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:{{ pepper_sdk_path }}"' >> "{{ vagrant_home }}/.bash_profile"
 
     - name: 日本語入力を有効化
+      become: yes
       shell: locale-gen ja_JP.UTF-8
 
     - name: localeの設定
       shell: bash -lc 'LC_ALL="en_US.UTF-8"'
-      sudo: no
