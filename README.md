@@ -26,15 +26,6 @@ $ mv ~/Downloads/pynaoqi-python2.7-2.3.1.25-linux64.tar.gz ./
 ```
 
 ### VM起動
-VMを起動する前にansibleというプロビジョニングツールをホスト側にインストールしておく必要があります。
-
-Macをお使いでHomebrewが入っている場合は
-
-```sh
-$ brew install ansible
-```
-
-でインストール可能です。
 
 以下のコマンドでVMを起動します。
 
